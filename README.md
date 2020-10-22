@@ -10,7 +10,7 @@ kubectl apply -n argo -f https://raw.githubusercontent.com/argoproj/argo/stable/
 
 Test it with
 ```
-argo submit -n argo --watch https://raw.githubusercontent.com/argoproj/argo/master/examples/hello-world.yaml --serviceaccount workflows-default
+argo submit -n argo --serviceaccount workflows-default --watch https://raw.githubusercontent.com/argoproj/argo/master/examples/hello-world.yaml 
 ```
 This assumes you have the `argo` CLI application installed locally. From the output, grab the workflow name and run 
 ```
