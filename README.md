@@ -14,7 +14,7 @@ argo submit -n argo --serviceaccount workflows-default --watch https://raw.githu
 ```
 This assumes you have the `argo` CLI application installed locally. From the output, grab the workflow name and run 
 ```
-argo logs -n workflows <workflow-name>
+argo logs -n argo <workflow-name>
 ```
 
 You should see a happy whale like this:
