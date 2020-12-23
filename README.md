@@ -5,7 +5,7 @@ Argo Workflow configuration and deploy for CMIP6 downscaling project.
 Assuming `kubectl` is installed and configured for the target cluster, deploy `argo` onto the cluster with
 ```
 kubectl apply -n argo -f manifests
-kubectl apply -n argo -f https://raw.githubusercontent.com/argoproj/argo/v2.11.6/manifests/namespace-install.yaml 
+kubectl apply -n argo -f https://raw.githubusercontent.com/argoproj/argo/v2.12.2/manifests/namespace-install.yaml 
 ```
 
 Test it with
