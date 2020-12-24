@@ -7,6 +7,19 @@ Assuming `kubectl` is installed and configured for the target cluster, deploy `a
 kubectl apply -n argo -f manifests
 kubectl apply -n argo -f https://raw.githubusercontent.com/argoproj/argo/v2.12.2/manifests/namespace-install.yaml 
 ```
+or if using `argocd`:
+```
+kubectl apply -n argo -f manifests
+rgocd app create argo \
+    --repo https://github.com/argoproj/argo.git \
+    --path manifests/cluster-install \
+    --dest-server https://kubernetes.default.svc \
+    --revision v2.12.2 \
+    --dest-namespace argo
+argocd app sync argo
+```
+
+This is a needed workaround for `kustomize` via https://github.com/kubernetes-sigs/kustomize/issues/3340. But anyways...
 
 Test it with
 ```
