@@ -1,0 +1,9 @@
+bases:
+- github.com/argoproj/argo//manifests/cluster-install?ref=v2.12.2
+
+resources:
+- daskKubernetes-role.yaml
+- workflow-role.yaml
+- workflows-default-serviceaccount.yaml
+- workflows-default-rolebinding.yaml
+- workflows-default-dask-rolebinding.yaml
