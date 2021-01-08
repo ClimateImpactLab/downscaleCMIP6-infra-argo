@@ -7,4 +7,4 @@ resources:
 - workflows-default-serviceaccount.yaml
 - workflows-default-rolebinding.yaml
 - workflows-default-dask-rolebinding.yaml
-- https://github.com/argoproj/argo/manifests/cluster-install?ref=v2.12.2
+- https://github.com/argoproj/argo/manifests/cluster-install?ref=v2.12.3
