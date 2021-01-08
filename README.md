@@ -14,7 +14,7 @@ rgocd app create argo \
     --repo https://github.com/argoproj/argo.git \
     --path manifests/cluster-install \
     --dest-server https://kubernetes.default.svc \
-    --revision v2.12.2 \
+    --revision v2.12.3 \
     --dest-namespace argo
 argocd app sync argo
 ```
