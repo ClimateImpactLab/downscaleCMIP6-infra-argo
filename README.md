@@ -1,7 +1,8 @@
 # downscaleCMIP6-infra-argo
 Argo Workflow configuration and deploy for CMIP6 downscaling project.
 
-## Installation
+
+## Deploying
 Assuming `kubectl` and `kustomize` is installed and configured for the target cluster, deploy `argo` onto the cluster with
 
 ```
@@ -18,26 +19,28 @@ argocd app create argo \
     --dest-server https://kubernetes.default.svc \
     --sync-policy automated \
     --auto-prune
-argocd app sync argo
 argocd app create workflows-default \
     --repo https://github.com/ClimateImpactLab/downscaleCMIP6-infra-argo.git \
     --path workflows-default \
     --dest-server https://kubernetes.default.svc \
     --sync-policy automated \
     --auto-prune
-argocd app sync workflows-default
 ```
 
 Test either deployment method with
+
 ```
-argo submit --serviceaccount workflows-default --watch https://raw.githubusercontent.com/argoproj/argo/master/examples/hello-world.yaml 
+argo submit -n default --serviceaccount workflows-default --watch https://raw.githubusercontent.com/argoproj/argo/master/examples/hello-world.yaml 
 ```
-This assumes you have the `argo` CLI application installed locally. From the output, grab the workflow name and run 
+
+This assumes you have the `argo` CLI application installed locally. From the output, grab the workflow name and run
+
 ```
 argo logs -n argo <workflow-name>
 ```
 
 If all is well, you will see a happy whale:
+
 ```
 hello-world-kqvvg:  _____________ 
 hello-world-kqvvg: < hello world >
