@@ -1,11 +1,14 @@
 # downscaleCMIP6-infra-argo
 Argo Workflow configuration and deploy for CMIP6 downscaling project.
 
+Manifests for Argo Workflow itself are in `argo/`. The `workflows-default/` directory contains manifests needed to support running Workflows for analysis.
+
 ## Updating
 
 If there is already has an deployment -- make changes by filing a pull request to `main`. Merged PRs are checked automatically pulled. 
 
 ## Deploying
+
 Assuming `kubectl` and `kustomize` is installed and configured for the target cluster, deploy `argo` onto the cluster with
 
 ```
