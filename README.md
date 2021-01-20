@@ -2,35 +2,42 @@
 Argo Workflow configuration and deploy for CMIP6 downscaling project.
 
 ## Installation
-Assuming `kubectl` is installed and configured for the target cluster, deploy `argo` onto the cluster with
+Assuming `kubectl` and `kustomize` is installed and configured for the target cluster, deploy `argo` onto the cluster with
+
 ```
-kubectl apply -n argo -f manifests
-kubectl apply -n argo -f https://raw.githubusercontent.com/argoproj/argo/v2.12.4/manifests/namespace-install.yaml 
+kustomize argo/ | kubectl apply -f -
+kustomize workflows-default/ | kubectl apply -f -
 ```
+
 or if using `argocd`:
+
 ```
-kubectl apply -n argo -f manifests
-rgocd app create argo \
-    --repo https://github.com/argoproj/argo.git \
-    --path manifests/cluster-install \
+argocd app create argo \
+    --repo https://github.com/ClimateImpactLab/downscaleCMIP6-infra-argo.git \
+    --path argo \
     --dest-server https://kubernetes.default.svc \
-    --revision v2.12.4 \
-    --dest-namespace argo
+    --sync-policy automated \
+    --auto-prune
 argocd app sync argo
+argocd app create workflows-default \
+    --repo https://github.com/ClimateImpactLab/downscaleCMIP6-infra-argo.git \
+    --path workflows-default \
+    --dest-server https://kubernetes.default.svc \
+    --sync-policy automated \
+    --auto-prune
+argocd app sync workflows-default
 ```
 
-This is a needed workaround for `kustomize` via https://github.com/kubernetes-sigs/kustomize/issues/3340. But anyways...
-
-Test it with
+Test either deployment method with
 ```
-argo submit -n argo --serviceaccount workflows-default --watch https://raw.githubusercontent.com/argoproj/argo/master/examples/hello-world.yaml 
+argo submit --serviceaccount workflows-default --watch https://raw.githubusercontent.com/argoproj/argo/master/examples/hello-world.yaml 
 ```
 This assumes you have the `argo` CLI application installed locally. From the output, grab the workflow name and run 
 ```
 argo logs -n argo <workflow-name>
 ```
 
-You should see a happy whale like this:
+If all is well, you will see a happy whale:
 ```
 hello-world-kqvvg:  _____________ 
 hello-world-kqvvg: < hello world >
