@@ -3,8 +3,6 @@ kind: Kustomization
 
 namespace: default
 resources:
-- ./daskKubernetes-role.yaml
 - ./workflow-role.yaml
 - ./workflows-default-serviceaccount.yaml
 - ./workflows-default-rolebinding.yaml
-- ./workflows-default-dask-rolebinding.yaml
