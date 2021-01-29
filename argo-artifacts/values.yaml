@@ -1,0 +1,5 @@
+minio:
+  azuregateway:
+    enabled: true
+    replicas: 3
+  existingSecret: miniocreds-secret
