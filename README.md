@@ -1,22 +1,25 @@
 # downscaleCMIP6-infra-argo
 Argo Workflow configuration and deploy for CMIP6 downscaling project.
 
-Manifests for Argo Workflow itself are in `argo/`. The `workflows-default/` directory contains manifests required to run analysis Workflows.
+Manifests for Argo Workflow itself are in `argo/`. The `workflows-default/` directory contains manifests required to run analysis Workflows. `minio/` is a configuration Helm Chart to deploy the artifact repository. Cluster internals are mostly managed with `argocd`.
 
 ## Updating
 
-If there is already has a deployment -- file a pull request with changes to `main`. Merged PRs are checked and automatically pulled. 
+If there is already has a deployment -- file a pull request with changes to `main`. Merged PRs are checked and automatically pulled.
 
 ## Deploying
 
-Assuming `kubectl` and `kustomize` is installed and configured for the target cluster, deploy `argo` onto the cluster with
+### Setup (`argocd`)
+To begin, you need to have `argocd` deployed on a cluster. If it is not already deployed, you can do so with
 
 ```
-kustomize argo/ | kubectl apply -f -
-kustomize workflows-default/ | kubectl apply -f -
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+kubectl patch deploy argocd-server -n argocd -p '[{"op": "add", "path": "/spec/template/spec/containers/0/command/-", "value": "--disable-auth"}]' --type json
 ```
 
-or if using `argocd`:
+### Argo Workflows
+
+Deploy `argo` onto the cluster with
 
 ```
 argocd app create argo \
@@ -25,14 +28,16 @@ argocd app create argo \
     --dest-server https://kubernetes.default.svc \
     --dest-namespace argo \
     --sync-policy automated \
-    --auto-prune
+    --auto-prune \
+    --port-forward-namespace argocd
 argocd app create workflows-default \
     --repo https://github.com/ClimateImpactLab/downscaleCMIP6-infra-argo.git \
     --path workflows-default \
     --dest-server https://kubernetes.default.svc \
     --dest-namespace argo \
     --sync-policy automated \
-    --auto-prune
+    --auto-prune \
+    --port-forward-namespace argocd
 ```
 
 Test either deployment method with
@@ -68,7 +73,7 @@ hello-world-kqvvg:           \____\______/
 
 ### Argo Workflow artifact repository (minio)
 
-Deploys `minio` on the cluster as an S3 wrapper to an underlying Azure Blob Storage. With the S3 interface, we can easily use Azure storage as an Argo Workflows artifact repository.
+`minio` works as an S3 wrapper to an underlying Azure Blob Storage. With the S3 interface, we can easily use Azure storage as an Argo Workflows artifact repository.
 
 Deploy `minio` into the `argo` namespace with:
 
@@ -81,6 +86,5 @@ argocd app create minio \
     --dest-namespace argo \
     --sync-policy automated \
     --auto-prune \
-    --self-heal \
     --port-forward-namespace argocd
 ```
