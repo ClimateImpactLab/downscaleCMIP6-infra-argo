@@ -17,5 +17,4 @@ appVersion: "0.0.1"
 dependencies:
   - name: minio
     version: "8.0.9"
-    repository: 'https://helm.min.io/
-'
+    repository: 'https://helm.min.io'
