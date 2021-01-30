@@ -4,3 +4,6 @@ minio:
     enabled: true
     replicas: 3
   existingSecret: miniocreds-secret
+  resources:
+    requests:
+      memory: 2Gi
