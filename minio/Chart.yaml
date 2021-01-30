@@ -1,5 +1,5 @@
 apiVersion: v2
-name: argo-artifacts
+name: minio
 description: DC6 Minio deployment for Argo Workflow artifacts
 type: application
 

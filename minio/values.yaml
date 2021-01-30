@@ -1,5 +1,4 @@
 minio:
-  fullnameOverride: argo-artifacts
   azuregateway:
     enabled: true
     replicas: 3

@@ -63,3 +63,23 @@ hello-world-kqvvg:        \______ o          __/
 hello-world-kqvvg:         \    \        __/             
 hello-world-kqvvg:           \____\______/   
 ```
+
+### Argo artifact repo (minio)
+
+Deploys `minio` on the cluster as an S3 wrapper to an underlying Azure Blob Storage. With the S3 interface, we can easily use Azure storage as an Argo Workflows artifact repository.
+
+Deploy `minio` into the `argo` namespace with:
+
+```
+argocd app create minio \
+    --repo https://github.com/ClimateImpactLab/downscaleCMIP6-infra-argo \
+    --revision add_minio \
+    --path minio \
+    --values values.yaml \
+    --dest-server https://kubernetes.default.svc \
+    --dest-namespace argo \
+    --sync-policy automated \
+    --auto-prune \
+    --self-heal \
+    --port-forward-namespace argocd
+```
