@@ -6,4 +6,4 @@ minio:
   existingSecret: miniocreds-secret
   resources:
     requests:
-      memory: 2Gi
+      memory: 1Gi
