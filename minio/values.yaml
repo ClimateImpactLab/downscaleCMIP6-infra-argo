@@ -1,8 +1,8 @@
 minio:
   azuregateway:
     enabled: true
-    replicas: 3
+    replicas: 1
   existingSecret: artifactrepocreds-secret
   resources:
     requests:
-      memory: 1Gi
+      memory: 1.5Gi
