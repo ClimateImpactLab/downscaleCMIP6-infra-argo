@@ -36,7 +36,7 @@ argocd app create workflows-default \
 Test either deployment method with
 
 ```
-argo submit -n default --serviceaccount workflows-default --watch https://raw.githubusercontent.com/argoproj/argo/master/examples/hello-world.yaml 
+argo submit -n argo --serviceaccount workflows-default --watch https://raw.githubusercontent.com/argoproj/argo/master/examples/hello-world.yaml 
 ```
 
 This assumes you have the `argo` CLI application installed locally. From the output, grab the workflow name and run
@@ -64,7 +64,7 @@ hello-world-kqvvg:         \    \        __/
 hello-world-kqvvg:           \____\______/   
 ```
 
-### Argo artifact repo (minio)
+### Argo Workflow artifact repository (minio)
 
 Deploys `minio` on the cluster as an S3 wrapper to an underlying Azure Blob Storage. With the S3 interface, we can easily use Azure storage as an Argo Workflows artifact repository.
 
