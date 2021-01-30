@@ -7,7 +7,7 @@ data:
     s3:
       bucket: scratch
       endpoint: minio:9000
-      insecure: true
+      insecure: false
       accessKeySecret:
         name: artifactrepocreds-secret
         key: accesskey
