@@ -4,5 +4,6 @@ kind: Kustomization
 namespace: argo
 resources:
 - ./argo-namespace.yaml
-- ./artifact-repositories-cm.yaml
 - github.com/argoproj/argo/manifests/cluster-install?ref=v2.12.6
+patchesStrategicMerge:
+- ./patches/add-default-artifact-repository.yaml
