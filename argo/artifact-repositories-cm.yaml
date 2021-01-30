@@ -10,6 +10,7 @@ data:
   default-v1: |
     s3:
       bucket: repo
+      bucket: my-gcs-bucket-name
       endpoint: minio:9000
       insecure: true
       accessKeySecret:
@@ -18,3 +19,4 @@ data:
       secretKeySecret:
         name: miniocreds-secret
         key: secretkey
+      keyFormat: "{{workflow.name}}/{{pod.name}}"
