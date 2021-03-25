@@ -4,3 +4,4 @@ resources:
 - github.com/argoproj/argo/manifests/cluster-install?ref=v2.12.10
 patchesStrategicMerge:
 - ./patches/add-default-artifact-repository.yaml
+- ./patches/change-aks-containerruntimeexecutor.yaml
