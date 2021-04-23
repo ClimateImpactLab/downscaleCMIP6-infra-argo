@@ -14,4 +14,3 @@ data:
       secretKeySecret:
         name: artifactrepocreds-secret
         key: secretkey
-      keyFormat: "{{workflow.name}}/{{pod.name}}"
