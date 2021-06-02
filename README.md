@@ -1,6 +1,8 @@
 # downscaleCMIP6-infra-argo
 Argo Workflow configuration and deploy for CMIP6 downscaling project.
 
+This repository is archived. Updated versions of this infrastructure are continued in https://github.com/ClimateImpactLab/downscaleCMIP6/tree/master/infrastructure/kubernetes.
+
 Manifests for Argo Workflow itself are in `argo/`. The `workflows-default/` directory contains manifests required to run analysis Workflows. `minio/` is a configuration Helm Chart to deploy the artifact repository. Cluster internals are mostly managed with `argocd`.
 
 ## Updating
